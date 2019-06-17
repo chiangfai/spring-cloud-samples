@@ -1,0 +1,14 @@
+server:
+  port: 1234
+spring:
+  application:
+    name: hystrix-dashboard-turbine
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+turbine:
+  app-config: eureka-consumer, eureka-consumer-2 # 需要收集监控信息的服务名
+  aggregator:
+    cluster-config: default # 指定聚合哪些集群,多个使用","分割，默认为default。
+  cluster-name-expression: new String("default") # "'default'" # 指定集群名称，当服务数量非常多的时候，可以启动多个Turbine服务构建不同的聚合集群

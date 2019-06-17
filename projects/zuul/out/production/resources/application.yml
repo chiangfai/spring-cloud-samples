@@ -1,0 +1,28 @@
+server:
+  port: 7777
+spring:
+  application:
+    name: zuul
+  # 链监控 config
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      # 采样率，模式0.1，也就是10%，为了便于观察效果，改为1.0，也就是100%。生产环境建议保持默认。
+      probability: 1.0
+
+zuul:
+  routes:
+    baidu:
+      path: /baidu/**
+      url: https://www.baidu.com
+    # 以api-producer开头请求转发至eureka-producer服务
+    api-producer:
+      path: /api-producer/**
+      serviceId: eureka-producer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+  instance:
+    prefer-ip-address: true # show ip

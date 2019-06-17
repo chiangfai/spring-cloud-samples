@@ -1,0 +1,31 @@
+server:
+  port: 8848
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      # enabled: true
+      discovery:
+        locator:
+          enabled: true
+          # url-expression: 'lb://'+serviceId
+      routes:
+      - id: i_route
+        uri: https://chiangfai.github.io
+        predicates:
+        - Path=/archives/** #/io/**
+      - id: producer_route
+        uri: lb://eureka-producer #
+        predicates:
+        - Path=/producer/**
+        filters:
+        - StripPrefix=1 # 请求路径截取功能
+        # - PrefixPath=prefix 路径前面添加前缀
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

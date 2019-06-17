@@ -1,0 +1,32 @@
+server:
+  port: 5555
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5673
+    username: guest
+    password: guest
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/chiangfai/config-repo
+          basedir: D:\AppData\config-repo-cache # 配置保存在本地的路径
+          default-label: master # git默认分支
+          # search-paths: config-repo
+          clone-on-start: true # 默认情况下，在配置被首次请求时，Config Server才会clone Git仓库。true在启动时就clone Git仓库
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh # *表示暴露所有接口端点
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+

@@ -1,0 +1,20 @@
+server:
+  port: 5556
+spring:
+  application:
+    name: config-client
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5673
+    username: guest
+    password: guest
+  cloud:
+    bus:
+      enabled: true
+      trace:
+        enabled: true #开启消息跟踪
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh # *表示暴露所有接口端点

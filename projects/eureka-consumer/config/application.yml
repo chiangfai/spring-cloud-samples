@@ -1,0 +1,25 @@
+server:
+  port: 9996
+spring:
+  application:
+    name: eureka-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+feign:
+  hystrix:
+    enabled: true # 开启熔断，熔断只是作用在服务调用这一端
+  # Feign支持对请求和响应进行GZIP压缩, 提高通信效率
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'hystrix.stream'

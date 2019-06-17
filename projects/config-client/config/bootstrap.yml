@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      name: test
+      profile: prod
+      label: master
+      # uri: http://127.0.0.1:5555/
+      discovery:
+        enabled: true # 从配置中心读取文件
+        service-id: config-server # 指定配置中心的servieId，即服务名
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/

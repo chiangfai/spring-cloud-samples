@@ -1,0 +1,20 @@
+server:
+  port: 7777
+spring:
+  application:
+    name: zuul
+zuul:
+  routes:
+    baidu:
+      path: /baidu/**
+      url: https://www.baidu.com
+    # 以api-producer开头请求转发至eureka-producer服务
+    api-producer:
+      path: /api-producer/**
+      serviceId: eureka-producer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9999/eureka/
+  instance:
+    prefer-ip-address: true # show ip
